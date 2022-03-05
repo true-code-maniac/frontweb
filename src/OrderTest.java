@@ -61,6 +61,11 @@ public class OrderTest extends JFrame{
 
     public OrderTest()
     {
+
+    }
+    public static void main(String[] args)
+    {
+        JFrame frame =new JFrame();
         String []columns={"Nr","Description","Type","Capacity","Processing","Year","Price", "Checked"};
         Object data[][]= {
                 {1,"Jacket","Clothing","75", "In Magazine", "2020", "500",false},
@@ -84,15 +89,11 @@ public class OrderTest extends JFrame{
             }
         };
         JScrollPane scrollPane = new JScrollPane(table);
-        getContentPane().add(scrollPane);
+        frame.getContentPane().add(scrollPane);
         JLabel labelHead = new JLabel("List of employees");
         labelHead.setFont(new Font("Arial",Font.TRUETYPE_FONT,20));
-        getContentPane().add(labelHead,BorderLayout.PAGE_START);
-    }
-    public static void main(String[] args)
-    {
+        frame.getContentPane().add(labelHead,BorderLayout.PAGE_START);
 
-        OrderTest frame = new OrderTest();
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
