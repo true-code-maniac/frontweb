@@ -59,6 +59,6 @@ public class OrderTest {
      f.setVisible(true);
      */
     public static void main(String []args){
-
+        System.out.println("Now it surely works");
     }
 }

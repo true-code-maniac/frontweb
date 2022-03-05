@@ -39,16 +39,16 @@ public class Warehouse {
                 int index = 0;
                 for(String desKey: storage.keySet()){
                     String[] desKeyTokens = desKey.split(" ");
-                    if(Arrays.stream(desKeyTokens).toList().contains(description))return storage.get(desKeyTokens[index]);
+                    if(Arrays.stream(desKeyTokens).collect(Collectors.toList()).contains(description))return storage.get(desKeyTokens[index]);
                     else index+=1;
                 }
             }
         }else{
             Set<String> desTokens = Arrays.stream(description.split(" ")).collect(Collectors.toSet());
             List<Set<String>> keyTokens = storage.keySet()
-                    .stream().toList()
+                    .stream().collect(Collectors.toList())
                     .stream()
-                    .map(key -> Arrays.stream(key.split(" ")).collect(Collectors.toSet())).toList();
+                    .map(key -> Arrays.stream(key.split(" ")).collect(Collectors.toSet())).collect(Collectors.toList());
             int index = 0;
             HashMap<Integer, Integer> indexCount = new HashMap<>();
             for(Set keySet: keyTokens){
@@ -61,7 +61,7 @@ public class Warehouse {
                 index += 1;
                 indexCount.put(index, count);
             }
-            int highestIndex = indexCount.entrySet().stream().sorted().map(Map.Entry::getKey).toList().get(0);
+            int highestIndex = indexCount.entrySet().stream().sorted().map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
             return storage.get(highestIndex);
         }
         return null;
