@@ -4,7 +4,7 @@ import java.awt.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class OrderTest {
+public class OrderTest extends JFrame{
 
     /**
      JFrame f=new JFrame();
@@ -58,7 +58,45 @@ public class OrderTest {
      f.setLayout(null);
      f.setVisible(true);
      */
-    public static void main(String []args){
-        System.out.println("Now it surely works");
+
+    public OrderTest()
+    {
+        String []columns={"Nr","Description","Type","Capacity","Processing","Year","Price", "Checked"};
+        Object data[][]= {
+                {1,"Jacket","Clothing","75", "In Magazine", "2020", "500",false},
+                {2,"Red Jacket","Clothing","200","In Magazine","2021",  "200",false},
+                {3,"Red Jacket Topolino","Clothing","30","In  Shipping","2021",  "200",false},
+                {4,"Jacket","Clothing","75", "In Magazine", "2020", "500",false},
+                {5,"Black Jacket","Clothing","200","In Magazine","2021",  "200", false},
+                {6,"Black Jacket Topolino","Clothing","30","In  Shipping","2021",  "200", false},
+                {7,"Jacket","Clothing","75", "In Magazine", "2020", "500",false},
+                {8,"Blue Jacket","Clothing","200","In Magazine","2021",  "200",false},
+                {9,"Blue Jacket Topolino","Clothing","30","In  Shipping","2021",  "200",false},
+                {10,"Jacket","Clothing","75", "In Magazine", "2020", "500",false},
+                {11,"White Jacket","Clothing","200","In Magazine","2021",  "200",false},
+                {12,"White Jacket Topolino","Clothing","30","In  Shipping","2021",  "200",false},
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+        JTable table = new JTable(model) {
+            public Class getColumnClass(int column) {
+                //return Boolean.class
+                return getValueAt(0, column).getClass();
+            }
+        };
+        JScrollPane scrollPane = new JScrollPane(table);
+        getContentPane().add(scrollPane);
+        JLabel labelHead = new JLabel("List of employees");
+        labelHead.setFont(new Font("Arial",Font.TRUETYPE_FONT,20));
+        getContentPane().add(labelHead,BorderLayout.PAGE_START);
     }
+    public static void main(String[] args)
+    {
+
+        OrderTest frame = new OrderTest();
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setSize(1000, 1000);
+        frame.setVisible(true);
+        frame.setTitle("OrderTest/Forward");
+    }
+
 }
