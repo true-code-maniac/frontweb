@@ -1,5 +1,6 @@
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class Warehouse {
     private HashMap<String, ProductQuantity> storage = new HashMap<>();
     private int quantity = 0;
@@ -38,13 +39,32 @@ public class Warehouse {
                 int index = 0;
                 for(String desKey: storage.keySet()){
                     String[] desKeyTokens = desKey.split(" ");
-                    if(Arrays.stream(desKeyTokens).toList().contains(description))storage.get(desKeyTokens[index]);
+                    if(Arrays.stream(desKeyTokens).toList().contains(description))return storage.get(desKeyTokens[index]);
                     else index+=1;
                 }
             }
         }else{
-
+            Set<String> desTokens = Arrays.stream(description.split(" ")).collect(Collectors.toSet());
+            List<Set<String>> keyTokens = storage.keySet()
+                    .stream().toList()
+                    .stream()
+                    .map(key -> Arrays.stream(key.split(" ")).collect(Collectors.toSet())).toList();
+            int index = 0;
+            HashMap<Integer, Integer> indexCount = new HashMap<>();
+            for(Set keySet: keyTokens){
+                 int count = 0;
+                for(String desToken: desTokens){
+                    if(keySet.contains(desToken)){
+                        count += 1;
+                    }
+                }
+                index += 1;
+                indexCount.put(index, count);
+            }
+            int highestIndex = indexCount.entrySet().stream().sorted().map(Map.Entry::getKey).toList().get(0);
+            return storage.get(highestIndex);
         }
+        return null;
     }
 
 
