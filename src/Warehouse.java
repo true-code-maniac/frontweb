@@ -13,8 +13,14 @@ public class Warehouse {
     }
 
     public  void addProductQuantity(String description, Product product, int quantity){
-        ProductQuantity productQuantity = new ProductQuantity(product, quantity);
-        storage.put(description,productQuantity);
+        if(!this.storage.containsKey(description)){
+            ProductQuantity productQuantity = new ProductQuantity(product, quantity);
+            this.storage.put(description,productQuantity);
+        }else{
+            ProductQuantity storageProductQuantity = this.storage.get(description);
+            ProductQuantity productQuantity = new ProductQuantity(product, storageProductQuantity.getQuantity()+quantity);
+            this.storage.put(description, productQuantity);
+        }
     }
 
     /**
