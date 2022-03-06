@@ -25,6 +25,14 @@ public class WarehouseTest {
         assertEquals(warehouse.getStorage().keySet().size(), 3);
     }
 
+    /**
+     * @Test getStorageSizeOne
+     * @description The following test is to check the storage  size. Differently to the previous function though.
+     * In this case it is added two different quantities of the same product. Thus if in the previous case are added
+     * product  quantities of different products. Here we add the same product twice with a specified quantity value.
+     * This is to check if the quantity is added to the existing product quantity in the storage hashtable in the warehouse.
+     */
+
     @Test
     public void getStorageSizeTwo(){
         Warehouse warehouse = new Warehouse();
@@ -38,5 +46,17 @@ public class WarehouseTest {
         assertEquals(warehouse.getStorage().get(productFour.getDescription()).getQuantity(), 20);
     }
 
+    /**
+     * @Test getProductQuantityTestOne
+     * @description This is a very simple first test where you get the product quantity by keyword.
+     */
+
+    @Test
+    public void getProductQuantityTestOne(){
+        Warehouse warehouse = new Warehouse();
+        warehouse.addProductQuantity(productOne.getDescription(), productOne, 10);
+        assertNotNull(warehouse.getProductQuantity(productOne.getDescription()));
+        assertEquals(warehouse.getProductQuantity(productOne.getDescription()).getQuantity(), 10);
+    }
 
 }

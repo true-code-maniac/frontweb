@@ -38,18 +38,19 @@ public class Warehouse {
      */
 
     public ProductQuantity getProductQuantity(String description){
-        if(description.split(" ").length == 0){
+        if(description.split(" ").length == 1){
             if(storage.containsKey(description)){
-                return storage.get(description);
+                return this.storage.get(description);
             }else{
                 int index = 0;
                 for(String desKey: storage.keySet()){
                     String[] desKeyTokens = desKey.split(" ");
-                    if(Arrays.stream(desKeyTokens).collect(Collectors.toList()).contains(description))return storage.get(desKeyTokens[index]);
+                    if(Arrays.stream(desKeyTokens).collect(Collectors.toList()).contains(description))return this.storage.get(desKeyTokens[index]);
                     else index+=1;
                 }
             }
         }else{
+            String [] tokens = description.split(" ");
             Set<String> desTokens = Arrays.stream(description.split(" ")).collect(Collectors.toSet());
             List<Set<String>> keyTokens = storage.keySet()
                     .stream().collect(Collectors.toList())
@@ -67,8 +68,8 @@ public class Warehouse {
                 index += 1;
                 indexCount.put(index, count);
             }
-            int highestIndex = indexCount.entrySet().stream().sorted().map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
-            return storage.get(highestIndex);
+            //int highestIndex = indexCount.entrySet().stream().sorted().map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
+            return this.storage.get(0);
         }
         return null;
     }
@@ -78,6 +79,7 @@ public class Warehouse {
     public HashMap<String, ProductQuantity> getStorage() {
         return storage;
     }
+
     public void setStorage(HashMap<String, ProductQuantity> storage) {this.storage = storage;}
     public int getQuantity() {
         return quantity;
