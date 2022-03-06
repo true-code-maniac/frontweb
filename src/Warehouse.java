@@ -50,13 +50,14 @@ public class Warehouse {
                 }
             }
         }else{
-            Set<String> desTokens = Arrays.stream(description.split(" ")).collect(Collectors.toSet());
+            Set<String> desTokens = Arrays.stream(description.split(" ")).map(String::toLowerCase).collect(Collectors.toSet());
             List<Set<String>> keyTokens = storage.keySet()
                     .stream().collect(Collectors.toList())
                     .stream()
-                    .map(key -> Arrays.stream(key.split(" ")).collect(Collectors.toSet())).collect(Collectors.toList());
+                    .map(key -> Arrays.stream(key.split(" ")).map(String::toLowerCase).collect(Collectors.toSet()))
+                    .collect(Collectors.toList());
             int index = 0;
-            HashMap<Integer, Integer> indexCount = new HashMap<>();
+            HashMap<String, Integer> indexCount = new HashMap<>();
             for(Set keySet: keyTokens){
                  int count = 0;
                 for(String desToken: desTokens){
@@ -64,11 +65,16 @@ public class Warehouse {
                         count += 1;
                     }
                 }
+                String key = "";
+                for(Object word: keySet){
+                    key+=String.valueOf(String.valueOf(word).charAt(0)).toUpperCase()+String.valueOf(word).substring(1)+" ";
+                }
+
                 index += 1;
-                indexCount.put(index, count);
+                indexCount.put(key, count);
             }
-            //int highestIndex = indexCount.entrySet().stream().sorted().map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
-            return this.storage.get(0);
+            String key = indexCount.entrySet().stream().sorted(Comparator.comparingInt(Map.Entry::getValue)).map(Map.Entry::getKey).collect(Collectors.toList()).get(indexCount.keySet().size()-1);
+            return this.storage.get(key);
         }
         return null;
     }

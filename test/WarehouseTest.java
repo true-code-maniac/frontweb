@@ -79,4 +79,14 @@ public class WarehouseTest {
         assertEquals(warehouse.getProductQuantity("ToPoliNO").getProduct().getDescription(), productTwo.getDescription());
     }
 
+    @Test
+    public void getProductQuantityTestThree(){
+        Warehouse warehouse = new Warehouse();
+        warehouse.addProductQuantity(productOne.getDescription(), productOne, 30);
+        warehouse.addProductQuantity(productTwo.getDescription(), productTwo, 30);
+        warehouse.addProductQuantity(productThree.getDescription(), productThree,  10);
+        warehouse.addProductQuantity(productFour.getDescription(), productFour,10);
+        assertNotNull(warehouse.getProductQuantity("blue Topolino"));
+    }
+
 }
