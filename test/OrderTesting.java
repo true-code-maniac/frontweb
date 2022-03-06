@@ -2,7 +2,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.*;
 import java.util.*;
 
-public class OrderTest {
+public class OrderTesting {
 
     @Test
     public void getTotalCostTest(){

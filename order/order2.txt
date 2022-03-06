@@ -1,0 +1,7 @@
+Description			Quantity			Cost
+-------------------------------------------------
+Jacket		100		3000.0
+Red Jacket		100		2000.0
+Blue Jacket With Topolino		100		1500.0
+Black Jacket		100		2500.0
+Blue Jacket With Topolino		100		1500.0
