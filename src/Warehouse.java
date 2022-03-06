@@ -45,12 +45,11 @@ public class Warehouse {
                 int index = 0;
                 for(String desKey: storage.keySet()){
                     String[] desKeyTokens = desKey.split(" ");
-                    if(Arrays.stream(desKeyTokens).collect(Collectors.toList()).contains(description))return this.storage.get(desKeyTokens[index]);
+                    if(Arrays.stream(desKeyTokens).map(String::toLowerCase).collect(Collectors.toList()).contains(description.toLowerCase()))return this.storage.get(desKey);
                     else index+=1;
                 }
             }
         }else{
-            String [] tokens = description.split(" ");
             Set<String> desTokens = Arrays.stream(description.split(" ")).collect(Collectors.toSet());
             List<Set<String>> keyTokens = storage.keySet()
                     .stream().collect(Collectors.toList())

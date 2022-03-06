@@ -4,7 +4,7 @@ import org.junit.*;
 public class WarehouseTest {
 
     private final Product productOne = new Product("Jacket", "Clothing", "300", "Shipping", 2020,300.0);
-    private final Product productTwo = new Product("Blue Jacket", "Clothing", "300", "Shipping", 2020,150.0);
+    private final Product productTwo = new Product("Blue Jacket With Topolino", "Clothing", "300", "Shipping", 2020,150.0);
     private final Product productThree = new Product("Red Jacket", "Clothing", "300", "Shipping", 2020,50.0);
     private final Product productFour = new Product("Black Jacket", "Clothing", "300", "In Magazine", 2020, 0.0);
 
@@ -57,6 +57,26 @@ public class WarehouseTest {
         warehouse.addProductQuantity(productOne.getDescription(), productOne, 10);
         assertNotNull(warehouse.getProductQuantity(productOne.getDescription()));
         assertEquals(warehouse.getProductQuantity(productOne.getDescription()).getQuantity(), 10);
+    }
+
+    @Test
+    public void getProductQuantityTestTwo(){
+        Warehouse warehouse = new Warehouse();
+        warehouse.addProductQuantity(productOne.getDescription(), productOne, 30);
+        warehouse.addProductQuantity(productTwo.getDescription(), productTwo, 30);
+        warehouse.addProductQuantity(productThree.getDescription(), productThree,  10);
+        warehouse.addProductQuantity(productFour.getDescription(), productFour,10);
+        assertNotNull(warehouse.getProductQuantity("blue"));
+        assertNotNull(warehouse.getProductQuantity("red"));
+        assertNotNull(warehouse.getProductQuantity("topolino"));
+        assertNotNull(warehouse.getProductQuantity("Topolino"));
+        assertNotNull(warehouse.getProductQuantity("ToPoliNO"));
+
+        assertEquals(warehouse.getProductQuantity("blue").getProduct().getDescription(), productTwo.getDescription());
+        assertEquals(warehouse.getProductQuantity("red").getProduct().getDescription(), productThree.getDescription());
+        assertEquals(warehouse.getProductQuantity("topolino").getProduct().getDescription(), productTwo.getDescription());
+        assertEquals(warehouse.getProductQuantity("Topolino").getProduct().getDescription(),  productTwo.getDescription());
+        assertEquals(warehouse.getProductQuantity("ToPoliNO").getProduct().getDescription(), productTwo.getDescription());
     }
 
 }
